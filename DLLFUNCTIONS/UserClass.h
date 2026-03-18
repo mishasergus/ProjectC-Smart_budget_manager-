@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "ShifrClass.h"
 
 class User{
 private:
@@ -12,6 +13,7 @@ public:
 	User(std::string username, std::string password, std::string email, std::string adress, double balance)
 		: username(username), email(email), adress(adress), balance(balance) {
 		this->password = password;
+		Shifr::shifr(this->password);
 	}
 	std::string getUsername();
 	std::string getPassword();

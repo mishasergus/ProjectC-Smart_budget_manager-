@@ -24,18 +24,27 @@
     <ClInclude Include="ShifrClass.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TransactionClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CategoryClass.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="APILogic.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ProjectC++(Smart_budget_manager)\sqlite3\sqlite3.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UserClassRealisation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ShifrRealisation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TransactionClassRealisation.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CategoryClassRealisation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
