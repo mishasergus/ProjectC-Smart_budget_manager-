@@ -6,7 +6,7 @@
 #include "TransactionClass.h"
 #include "ShifrClass.h"
 
-bool DbMethods::isCategoryExists(int id) {
+void DbMethods::updateTransaction(std::string login, int id, std::string name, double amount, int categoryId) {
 	sqlite3* db;
 	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
 		std::cout << "OK\n";
@@ -15,9 +15,132 @@ bool DbMethods::isCategoryExists(int id) {
 	{
 		std::cout << "ERROR\n";
 	}
+	int idU = getUserId(login);
+	std::string sql = "UPDATE TRANSACTIONS SET NAME = '" + name + "', AMOUNT = '" + std::to_string(amount) + "', CAREGORY_ID = '" + std::to_string(categoryId) + "' "
+		"WHERE ID = '" + std::to_string(id) + "' AND USER_ID = '" + std::to_string(idU) + "';";
+	if (sqlite3_exec(db, sql.c_str(), nullptr, nullptr, nullptr) == SQLITE_OK) {
+	}
+	sqlite3_close(db);
+}
+
+void DbMethods::updateCategory(std::string login, int id, std::string name) {
+	sqlite3* db;
+	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
+		std::cout << "OK\n";
+	}
+	else
+	{
+		std::cout << "ERROR\n";
+	}
+	int idU = getUserId(login);
+	std::string sql = "UPDATE CATEGORIES SET NAME = '" + name + "' "
+		"WHERE ID = '" + std::to_string(id) + "' AND USER_ID = '" + std::to_string(idU) + "';";
+	if (sqlite3_exec(db, sql.c_str(), nullptr, nullptr, nullptr) == SQLITE_OK) {
+	}
+	sqlite3_close(db);
+}
+
+double DbMethods::getSumAmountByCategoryId(int id) {
+	sqlite3* db;
+	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
+		std::cout << "OK\n";
+	}
+	else
+	{
+		std::cout << "ERROR\n";
+	}
+	double sum = 0.0;
+	std::string sql = "SELECT SUM(AMOUNT) FROM TRANSACTIONS "
+		"WHERE CAREGORY_ID = '" + std::to_string(id) + "';";
+	if (sqlite3_exec(db, sql.c_str(), callbackGetBalance, &sum, nullptr) == SQLITE_OK) {
+	}
+	sqlite3_close(db);
+	return sum;
+}
+
+void DbMethods::deleteTransactionByCategoryId(int id) {
+	sqlite3* db;
+	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
+		std::cout << "OK\n";
+	}
+	else
+	{
+		std::cout << "ERROR\n";
+	}
+	std::string sql = "DELETE FROM TRANSACTIONS "
+		"WHERE CAREGORY_ID = '" + std::to_string(id) + "';";
+	if (sqlite3_exec(db, sql.c_str(), nullptr, nullptr, nullptr) == SQLITE_OK) {
+	}
+	sqlite3_close(db);
+}
+
+void DbMethods::deleteTransaction(std::string login, int id) {
+	if (!isTransactionExist(login, id)) return;
+	sqlite3* db;
+	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
+		std::cout << "OK\n";
+	}
+	else
+	{
+		std::cout << "ERROR\n";
+	}
+	std::string sql = "DELETE FROM TRANSACTIONS "
+		"WHERE ID = '" + std::to_string(id) + "';";
+	if (sqlite3_exec(db, sql.c_str(), nullptr, nullptr, nullptr) == SQLITE_OK) {
+	}
+	sqlite3_close(db);
+}
+
+void DbMethods::deleteCategory(std::string login, int id) {
+	if (!isCategoryExists(login, id)) return;
+	sqlite3* db;
+	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
+		std::cout << "OK\n";
+	}
+	else
+	{
+		std::cout << "ERROR\n";
+	}
+	deleteTransactionByCategoryId(id);
+	std::string sql = "DELETE FROM CATEGORIES "
+		"WHERE ID = '" + std::to_string(id) + "';";
+	if (sqlite3_exec(db, sql.c_str(), nullptr, nullptr, nullptr) == SQLITE_OK) {
+	}
+	sqlite3_close(db);
+}
+
+bool DbMethods::isTransactionExist(std::string login, int id) {
+	sqlite3* db;
+	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
+		std::cout << "OK\n";
+	}
+	else
+	{
+		std::cout << "ERROR\n";
+	}
+	int idU = getUserId(login);
+	bool isEx = false;
+	std::string sql = "SELECT * FROM TRANSACTIONS "
+		"WHERE ID = '" + std::to_string(id) + "' AND USER_ID = '" + std::to_string(idU) + "';";
+	if (sqlite3_exec(db, sql.c_str(), callbackIsAnyExist, &isEx, nullptr) == SQLITE_OK) {
+	}
+	sqlite3_close(db);
+	return isEx;
+}
+
+bool DbMethods::isCategoryExists(std::string login, int id) {
+	sqlite3* db;
+	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
+		std::cout << "OK\n";
+	}
+	else
+	{
+		std::cout << "ERROR\n";
+	}
+	int idU = getUserId(login);
 	bool isEx = false;
 	std::string sql = "SELECT * FROM CATEGORIES "
-		"WHERE ID = '" + std::to_string(id) + "';";
+		"WHERE ID = '" + std::to_string(id) + "' AND USER_ID = '" + std::to_string(idU) + "';";
 	if (sqlite3_exec(db, sql.c_str(), callbackIsAnyExist, &isEx, nullptr) == SQLITE_OK) {
 	}
 	sqlite3_close(db);
@@ -92,6 +215,14 @@ int DbMethods::callbackGetInf(void* info, int size, char** arg, char** col_name)
 		*inf += "\n";
 	}
 	*inf += "|\n";
+	return 0;
+}
+int DbMethods::callbackGetName(void* info, int size, char** arg, char** col_name) {
+	std::string* name = static_cast<std::string*>(info);
+	*name = "";
+	if (size > 0 && arg[0] != nullptr) {
+		*name = arg[0];
+	}
 	return 0;
 }
 int DbMethods::callbackIsAnyExist(void* info, int size, char** arg, char** col_name) {
@@ -308,7 +439,7 @@ double DbMethods::getBalance(std::string login) {
 	return b;
 }
 
-std::string DbMethods::getTransactions(std::string login) {
+std::string DbMethods::getTransactions(std::string login, std::string orderBy) {
 	int id;
 	try {
 		id = getUserId(login);
@@ -325,7 +456,59 @@ std::string DbMethods::getTransactions(std::string login) {
 		std::cout << "ERROR\n";
 	}
 	std::string inf;
-	std::string sql = "SELECT * FROM TRANSACTIONS WHERE USER_ID = '" + std::to_string(id) + "';";
+	std::string sql = "SELECT * FROM TRANSACTIONS WHERE USER_ID = '" + std::to_string(id) + "' "
+		"ORDER BY "+ orderBy + " ASC;";
+	if (sqlite3_exec(db, sql.c_str(), callbackGetInf, &inf, nullptr) == SQLITE_OK) {
+	}
+	sqlite3_close(db);
+	return inf;
+}
+std::string DbMethods::getTransactionsGroupBy(std::string login, std::string groupBy) {
+	int id;
+	try {
+		id = getUserId(login);
+	}
+	catch (...) {
+		return "";
+	}
+	sqlite3* db;
+	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
+		std::cout << "OK\n";
+	}
+	else
+	{
+		std::cout << "ERROR\n";
+	}
+	std::string inf;
+	std::string sql = "SELECT " + groupBy + ", SUM(AMOUNT) FROM TRANSACTIONS "
+		"WHERE USER_ID = " + std::to_string(id) + " "
+		"GROUP BY " + groupBy + ";";
+	if (sqlite3_exec(db, sql.c_str(), callbackGetInf, &inf, nullptr) == SQLITE_OK) {
+	}
+	sqlite3_close(db);
+	return inf;
+}
+std::string DbMethods::getTransactionsByDate(std::string login, std::string date1, std::string date2) {
+	int id;
+	try {
+		id = getUserId(login);
+	}
+	catch (...) {
+		return "";
+	}
+	sqlite3* db;
+	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
+		std::cout << "OK\n";
+	}
+	else
+	{
+		std::cout << "ERROR\n";
+	}
+	std::string inf;
+	std::string sql = "SELECT DATE_OF_TRANSACTION, MAX(AMOUNT), NAME FROM TRANSACTIONS "
+		"WHERE USER_ID = " + std::to_string(id) + " "
+		"AND DATE_OF_TRANSACTION >= '" + date1 + "' "
+		"AND DATE_OF_TRANSACTION <= '" + date2 + "';";
 	if (sqlite3_exec(db, sql.c_str(), callbackGetInf, &inf, nullptr) == SQLITE_OK) {
 	}
 	sqlite3_close(db);
@@ -354,6 +537,79 @@ std::string DbMethods::getCategories(std::string login) {
 	sqlite3_close(db);
 	return inf;
 }
+
+double DbMethods::getTransactionAmount(std::string login, int id) {
+	sqlite3* db;
+	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
+		std::cout << "OK\n";
+	}
+	else
+	{
+		std::cout << "ERROR\n";
+	}
+	int idU = getUserId(login);
+	double amount;
+	std::string sql = "SELECT AMOUNT FROM TRANSACTIONS WHERE ID = '" + std::to_string(id) + "' AND USER_ID = '" + std::to_string(idU) + "';";
+	if (sqlite3_exec(db, sql.c_str(), callbackGetBalance, &amount, nullptr) == SQLITE_OK) {
+	}
+	sqlite3_close(db);
+	return amount;
+}
+
+int DbMethods::getTransactionCategoryId(std::string login, int id) {
+	sqlite3* db;
+	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
+		std::cout << "OK\n";
+	}
+	else
+	{
+		std::cout << "ERROR\n";
+	}
+	int idU = getUserId(login);
+	int catId;
+	std::string sql = "SELECT CAREGORY_ID FROM TRANSACTIONS WHERE ID = '" + std::to_string(id) + "' AND USER_ID = '" + std::to_string(idU) + "';";
+	if (sqlite3_exec(db, sql.c_str(), callbackGetId, &catId, nullptr) == SQLITE_OK) {
+	}
+	sqlite3_close(db);
+	return catId;
+}
+
+std::string DbMethods::getTransactionName(std::string login, int id) {
+	sqlite3* db;
+	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
+		std::cout << "OK\n";
+	}
+	else
+	{
+		std::cout << "ERROR\n";
+	}
+	int idU = getUserId(login);
+	std::string name;
+	std::string sql = "SELECT NAME FROM TRANSACTIONS WHERE ID = '" + std::to_string(id) + "' AND USER_ID = '" + std::to_string(idU) + "';";
+	if (sqlite3_exec(db, sql.c_str(), callbackGetName, &name, nullptr) == SQLITE_OK) {
+	}
+	sqlite3_close(db);
+	return name;
+}
+
+std::string DbMethods::getCategoryName(std::string login, int id) {
+	sqlite3* db;
+	if (sqlite3_open("SmartBudget.db", &db) == SQLITE_OK) {
+		std::cout << "OK\n";
+	}
+	else
+	{
+		std::cout << "ERROR\n";
+	}
+	int idU = getUserId(login);
+	std::string name;
+	std::string sql = "SELECT NAME FROM CATEGORIES WHERE ID = '" + std::to_string(id) + "' AND USER_ID = '" + std::to_string(idU) + "';";
+	if (sqlite3_exec(db, sql.c_str(), callbackGetName, &name, nullptr) == SQLITE_OK) {
+	}
+	sqlite3_close(db);
+	return name;
+}
+
 
 void DbMethods::updateBalance(std::string login, double change) {
 	int id;

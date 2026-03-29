@@ -65,6 +65,29 @@ namespace ProjectCSmartbudgetmanager {
 	private: System::Windows::Forms::TextBox^ textBox_TransactionCatId;
 
 	private: System::Windows::Forms::Button^ button_addTransaction;
+	private: System::Windows::Forms::Button^ button_orderByDate;
+	private: System::Windows::Forms::Button^ button_orderByCategory;
+	private: System::Windows::Forms::Button^ button_orderByAmount;
+	private: System::Windows::Forms::Button^ button_groupByCategory;
+	private: System::Windows::Forms::DateTimePicker^ dateTimePickerStart;
+	private: System::Windows::Forms::DateTimePicker^ dateTimePickerEnd;
+	private: System::Windows::Forms::Button^ button_maxByTime;
+	private: System::Windows::Forms::Button^ button_DeleteTransaction;
+	private: System::Windows::Forms::Button^ button_DeleteCategory;
+	private: System::Windows::Forms::TextBox^ textBox_idToDel;
+	private: System::Windows::Forms::Button^ button_selectForUpdatingCat;
+	private: System::Windows::Forms::Button^ button_selectForUpdatingTran;
+	private: System::Windows::Forms::TextBox^ textBox_updatingName;
+	private: System::Windows::Forms::TextBox^ textBox_updatingAmount;
+	private: System::Windows::Forms::TextBox^ textBox_updatingCategoryId;
+	private: System::Windows::Forms::Button^ button_updateTransaction;
+	private: System::Windows::Forms::Button^ button_updateCategoty;
+
+
+
+
+
+
 
 
 
@@ -107,13 +130,31 @@ namespace ProjectCSmartbudgetmanager {
 			this->textBox_transactionAmount = (gcnew System::Windows::Forms::TextBox());
 			this->textBox_TransactionCatId = (gcnew System::Windows::Forms::TextBox());
 			this->button_addTransaction = (gcnew System::Windows::Forms::Button());
+			this->button_orderByDate = (gcnew System::Windows::Forms::Button());
+			this->button_orderByCategory = (gcnew System::Windows::Forms::Button());
+			this->button_orderByAmount = (gcnew System::Windows::Forms::Button());
+			this->button_groupByCategory = (gcnew System::Windows::Forms::Button());
+			this->dateTimePickerStart = (gcnew System::Windows::Forms::DateTimePicker());
+			this->dateTimePickerEnd = (gcnew System::Windows::Forms::DateTimePicker());
+			this->button_maxByTime = (gcnew System::Windows::Forms::Button());
+			this->button_DeleteTransaction = (gcnew System::Windows::Forms::Button());
+			this->button_DeleteCategory = (gcnew System::Windows::Forms::Button());
+			this->textBox_idToDel = (gcnew System::Windows::Forms::TextBox());
+			this->button_selectForUpdatingCat = (gcnew System::Windows::Forms::Button());
+			this->button_selectForUpdatingTran = (gcnew System::Windows::Forms::Button());
+			this->textBox_updatingName = (gcnew System::Windows::Forms::TextBox());
+			this->textBox_updatingAmount = (gcnew System::Windows::Forms::TextBox());
+			this->textBox_updatingCategoryId = (gcnew System::Windows::Forms::TextBox());
+			this->button_updateTransaction = (gcnew System::Windows::Forms::Button());
+			this->button_updateCategoty = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// login_button
 			// 
-			this->login_button->Location = System::Drawing::Point(121, 8);
+			this->login_button->Location = System::Drawing::Point(121, 7);
+			this->login_button->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->login_button->Name = L"login_button";
-			this->login_button->Size = System::Drawing::Size(102, 38);
+			this->login_button->Size = System::Drawing::Size(101, 38);
 			this->login_button->TabIndex = 0;
 			this->login_button->Text = L"Log in";
 			this->login_button->UseVisualStyleBackColor = true;
@@ -121,9 +162,10 @@ namespace ProjectCSmartbudgetmanager {
 			// 
 			// singout_button
 			// 
-			this->singout_button->Location = System::Drawing::Point(13, 8);
+			this->singout_button->Location = System::Drawing::Point(13, 7);
+			this->singout_button->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->singout_button->Name = L"singout_button";
-			this->singout_button->Size = System::Drawing::Size(102, 38);
+			this->singout_button->Size = System::Drawing::Size(101, 38);
 			this->singout_button->TabIndex = 1;
 			this->singout_button->Text = L"Sing out";
 			this->singout_button->UseVisualStyleBackColor = true;
@@ -132,22 +174,25 @@ namespace ProjectCSmartbudgetmanager {
 			// textBox_password
 			// 
 			this->textBox_password->Location = System::Drawing::Point(12, 52);
+			this->textBox_password->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox_password->Name = L"textBox_password";
-			this->textBox_password->Size = System::Drawing::Size(210, 22);
+			this->textBox_password->Size = System::Drawing::Size(209, 22);
 			this->textBox_password->TabIndex = 2;
 			this->textBox_password->Text = L"password";
 			// 
 			// textBox_login
 			// 
 			this->textBox_login->Location = System::Drawing::Point(13, 80);
+			this->textBox_login->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox_login->Name = L"textBox_login";
-			this->textBox_login->Size = System::Drawing::Size(210, 22);
+			this->textBox_login->Size = System::Drawing::Size(209, 22);
 			this->textBox_login->TabIndex = 3;
 			this->textBox_login->Text = L"login";
 			// 
 			// textBox_adress
 			// 
-			this->textBox_adress->Location = System::Drawing::Point(13, 136);
+			this->textBox_adress->Location = System::Drawing::Point(13, 135);
+			this->textBox_adress->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox_adress->Name = L"textBox_adress";
 			this->textBox_adress->Size = System::Drawing::Size(103, 22);
 			this->textBox_adress->TabIndex = 5;
@@ -156,6 +201,7 @@ namespace ProjectCSmartbudgetmanager {
 			// textBox_name
 			// 
 			this->textBox_name->Location = System::Drawing::Point(12, 108);
+			this->textBox_name->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox_name->Name = L"textBox_name";
 			this->textBox_name->Size = System::Drawing::Size(103, 22);
 			this->textBox_name->TabIndex = 4;
@@ -173,8 +219,9 @@ namespace ProjectCSmartbudgetmanager {
 			// button1
 			// 
 			this->button1->Location = System::Drawing::Point(256, 178);
+			this->button1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(332, 23);
+			this->button1->Size = System::Drawing::Size(332, 31);
 			this->button1->TabIndex = 8;
 			this->button1->Text = L"Update transactions";
 			this->button1->UseVisualStyleBackColor = true;
@@ -187,11 +234,11 @@ namespace ProjectCSmartbudgetmanager {
 			this->DISPLAY->HorizontalScrollbar = true;
 			this->DISPLAY->ImeMode = System::Windows::Forms::ImeMode::NoControl;
 			this->DISPLAY->ItemHeight = 16;
-			this->DISPLAY->Location = System::Drawing::Point(256, 8);
+			this->DISPLAY->Location = System::Drawing::Point(256, 7);
+			this->DISPLAY->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->DISPLAY->Name = L"DISPLAY";
 			this->DISPLAY->ScrollAlwaysVisible = true;
 			this->DISPLAY->Size = System::Drawing::Size(332, 164);
-			this->DISPLAY->Sorted = true;
 			this->DISPLAY->TabIndex = 23;
 			// 
 			// timer1
@@ -203,7 +250,7 @@ namespace ProjectCSmartbudgetmanager {
 			// BalanceL
 			// 
 			this->BalanceL->AutoSize = true;
-			this->BalanceL->Location = System::Drawing::Point(9, 307);
+			this->BalanceL->Location = System::Drawing::Point(12, 161);
 			this->BalanceL->Name = L"BalanceL";
 			this->BalanceL->Size = System::Drawing::Size(60, 16);
 			this->BalanceL->TabIndex = 24;
@@ -213,18 +260,19 @@ namespace ProjectCSmartbudgetmanager {
 			// 
 			this->categories->FormattingEnabled = true;
 			this->categories->ItemHeight = 16;
-			this->categories->Location = System::Drawing::Point(620, 9);
+			this->categories->Location = System::Drawing::Point(803, 9);
+			this->categories->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->categories->Name = L"categories";
 			this->categories->ScrollAlwaysVisible = true;
 			this->categories->Size = System::Drawing::Size(212, 164);
-			this->categories->Sorted = true;
 			this->categories->TabIndex = 26;
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(620, 179);
+			this->button2->Location = System::Drawing::Point(803, 178);
+			this->button2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(212, 23);
+			this->button2->Size = System::Drawing::Size(212, 31);
 			this->button2->TabIndex = 25;
 			this->button2->Text = L"Update categories";
 			this->button2->UseVisualStyleBackColor = true;
@@ -232,7 +280,8 @@ namespace ProjectCSmartbudgetmanager {
 			// 
 			// textBox_nameCategory
 			// 
-			this->textBox_nameCategory->Location = System::Drawing::Point(620, 208);
+			this->textBox_nameCategory->Location = System::Drawing::Point(801, 214);
+			this->textBox_nameCategory->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox_nameCategory->Name = L"textBox_nameCategory";
 			this->textBox_nameCategory->Size = System::Drawing::Size(212, 22);
 			this->textBox_nameCategory->TabIndex = 27;
@@ -241,9 +290,10 @@ namespace ProjectCSmartbudgetmanager {
 			// 
 			// button_addCategoty
 			// 
-			this->button_addCategoty->Location = System::Drawing::Point(620, 236);
+			this->button_addCategoty->Location = System::Drawing::Point(803, 251);
+			this->button_addCategoty->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button_addCategoty->Name = L"button_addCategoty";
-			this->button_addCategoty->Size = System::Drawing::Size(212, 23);
+			this->button_addCategoty->Size = System::Drawing::Size(212, 31);
 			this->button_addCategoty->TabIndex = 28;
 			this->button_addCategoty->Text = L"Add categoty";
 			this->button_addCategoty->UseVisualStyleBackColor = true;
@@ -251,7 +301,8 @@ namespace ProjectCSmartbudgetmanager {
 			// 
 			// textBox_transactionName
 			// 
-			this->textBox_transactionName->Location = System::Drawing::Point(256, 207);
+			this->textBox_transactionName->Location = System::Drawing::Point(257, 322);
+			this->textBox_transactionName->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox_transactionName->Name = L"textBox_transactionName";
 			this->textBox_transactionName->Size = System::Drawing::Size(332, 22);
 			this->textBox_transactionName->TabIndex = 29;
@@ -259,7 +310,8 @@ namespace ProjectCSmartbudgetmanager {
 			// 
 			// textBox_transactionAmount
 			// 
-			this->textBox_transactionAmount->Location = System::Drawing::Point(256, 236);
+			this->textBox_transactionAmount->Location = System::Drawing::Point(257, 351);
+			this->textBox_transactionAmount->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox_transactionAmount->Name = L"textBox_transactionAmount";
 			this->textBox_transactionAmount->Size = System::Drawing::Size(332, 22);
 			this->textBox_transactionAmount->TabIndex = 30;
@@ -267,7 +319,8 @@ namespace ProjectCSmartbudgetmanager {
 			// 
 			// textBox_TransactionCatId
 			// 
-			this->textBox_TransactionCatId->Location = System::Drawing::Point(256, 264);
+			this->textBox_TransactionCatId->Location = System::Drawing::Point(257, 379);
+			this->textBox_TransactionCatId->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->textBox_TransactionCatId->Name = L"textBox_TransactionCatId";
 			this->textBox_TransactionCatId->Size = System::Drawing::Size(332, 22);
 			this->textBox_TransactionCatId->TabIndex = 31;
@@ -275,19 +328,203 @@ namespace ProjectCSmartbudgetmanager {
 			// 
 			// button_addTransaction
 			// 
-			this->button_addTransaction->Location = System::Drawing::Point(256, 292);
+			this->button_addTransaction->Location = System::Drawing::Point(257, 407);
+			this->button_addTransaction->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->button_addTransaction->Name = L"button_addTransaction";
-			this->button_addTransaction->Size = System::Drawing::Size(332, 23);
+			this->button_addTransaction->Size = System::Drawing::Size(332, 31);
 			this->button_addTransaction->TabIndex = 32;
 			this->button_addTransaction->Text = L"Add transaction";
 			this->button_addTransaction->UseVisualStyleBackColor = true;
 			this->button_addTransaction->Click += gcnew System::EventHandler(this, &LogForm::button_addTransaction_Click);
 			// 
+			// button_orderByDate
+			// 
+			this->button_orderByDate->Location = System::Drawing::Point(259, 214);
+			this->button_orderByDate->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->button_orderByDate->Name = L"button_orderByDate";
+			this->button_orderByDate->Size = System::Drawing::Size(332, 31);
+			this->button_orderByDate->TabIndex = 33;
+			this->button_orderByDate->Text = L"Order by date";
+			this->button_orderByDate->UseVisualStyleBackColor = true;
+			this->button_orderByDate->Click += gcnew System::EventHandler(this, &LogForm::button_orderByDate_Click);
+			// 
+			// button_orderByCategory
+			// 
+			this->button_orderByCategory->Location = System::Drawing::Point(259, 251);
+			this->button_orderByCategory->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->button_orderByCategory->Name = L"button_orderByCategory";
+			this->button_orderByCategory->Size = System::Drawing::Size(332, 31);
+			this->button_orderByCategory->TabIndex = 34;
+			this->button_orderByCategory->Text = L"Order by category";
+			this->button_orderByCategory->UseVisualStyleBackColor = true;
+			this->button_orderByCategory->Click += gcnew System::EventHandler(this, &LogForm::button_orderByCategory_Click);
+			// 
+			// button_orderByAmount
+			// 
+			this->button_orderByAmount->Location = System::Drawing::Point(259, 287);
+			this->button_orderByAmount->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->button_orderByAmount->Name = L"button_orderByAmount";
+			this->button_orderByAmount->Size = System::Drawing::Size(332, 31);
+			this->button_orderByAmount->TabIndex = 35;
+			this->button_orderByAmount->Text = L"Order by amount";
+			this->button_orderByAmount->UseVisualStyleBackColor = true;
+			this->button_orderByAmount->Click += gcnew System::EventHandler(this, &LogForm::button_orderByAmount_Click);
+			// 
+			// button_groupByCategory
+			// 
+			this->button_groupByCategory->Location = System::Drawing::Point(597, 251);
+			this->button_groupByCategory->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->button_groupByCategory->Name = L"button_groupByCategory";
+			this->button_groupByCategory->Size = System::Drawing::Size(203, 31);
+			this->button_groupByCategory->TabIndex = 36;
+			this->button_groupByCategory->Text = L"Group by category";
+			this->button_groupByCategory->UseVisualStyleBackColor = true;
+			this->button_groupByCategory->Click += gcnew System::EventHandler(this, &LogForm::button_groupByCategory_Click);
+			// 
+			// dateTimePickerStart
+			// 
+			this->dateTimePickerStart->Location = System::Drawing::Point(597, 287);
+			this->dateTimePickerStart->Margin = System::Windows::Forms::Padding(4);
+			this->dateTimePickerStart->Name = L"dateTimePickerStart";
+			this->dateTimePickerStart->Size = System::Drawing::Size(201, 22);
+			this->dateTimePickerStart->TabIndex = 37;
+			// 
+			// dateTimePickerEnd
+			// 
+			this->dateTimePickerEnd->Location = System::Drawing::Point(597, 319);
+			this->dateTimePickerEnd->Margin = System::Windows::Forms::Padding(4);
+			this->dateTimePickerEnd->Name = L"dateTimePickerEnd";
+			this->dateTimePickerEnd->Size = System::Drawing::Size(201, 22);
+			this->dateTimePickerEnd->TabIndex = 38;
+			// 
+			// button_maxByTime
+			// 
+			this->button_maxByTime->Location = System::Drawing::Point(596, 350);
+			this->button_maxByTime->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
+			this->button_maxByTime->Name = L"button_maxByTime";
+			this->button_maxByTime->Size = System::Drawing::Size(203, 31);
+			this->button_maxByTime->TabIndex = 39;
+			this->button_maxByTime->Text = L"Max by time";
+			this->button_maxByTime->UseVisualStyleBackColor = true;
+			this->button_maxByTime->Click += gcnew System::EventHandler(this, &LogForm::button_maxByTime_Click);
+			// 
+			// button_DeleteTransaction
+			// 
+			this->button_DeleteTransaction->Location = System::Drawing::Point(596, 7);
+			this->button_DeleteTransaction->Margin = System::Windows::Forms::Padding(4);
+			this->button_DeleteTransaction->Name = L"button_DeleteTransaction";
+			this->button_DeleteTransaction->Size = System::Drawing::Size(100, 28);
+			this->button_DeleteTransaction->TabIndex = 40;
+			this->button_DeleteTransaction->Text = L"Del trans";
+			this->button_DeleteTransaction->UseVisualStyleBackColor = true;
+			this->button_DeleteTransaction->Click += gcnew System::EventHandler(this, &LogForm::button_DeleteTransaction_Click);
+			// 
+			// button_DeleteCategory
+			// 
+			this->button_DeleteCategory->Location = System::Drawing::Point(696, 7);
+			this->button_DeleteCategory->Margin = System::Windows::Forms::Padding(4);
+			this->button_DeleteCategory->Name = L"button_DeleteCategory";
+			this->button_DeleteCategory->Size = System::Drawing::Size(100, 28);
+			this->button_DeleteCategory->TabIndex = 42;
+			this->button_DeleteCategory->Text = L"Del cat";
+			this->button_DeleteCategory->UseVisualStyleBackColor = true;
+			this->button_DeleteCategory->Click += gcnew System::EventHandler(this, &LogForm::button_DeleteCategory_Click);
+			// 
+			// textBox_idToDel
+			// 
+			this->textBox_idToDel->Location = System::Drawing::Point(596, 43);
+			this->textBox_idToDel->Margin = System::Windows::Forms::Padding(4);
+			this->textBox_idToDel->Name = L"textBox_idToDel";
+			this->textBox_idToDel->Size = System::Drawing::Size(199, 22);
+			this->textBox_idToDel->TabIndex = 43;
+			this->textBox_idToDel->Text = L"Id";
+			// 
+			// button_selectForUpdatingCat
+			// 
+			this->button_selectForUpdatingCat->Location = System::Drawing::Point(696, 72);
+			this->button_selectForUpdatingCat->Name = L"button_selectForUpdatingCat";
+			this->button_selectForUpdatingCat->Size = System::Drawing::Size(99, 23);
+			this->button_selectForUpdatingCat->TabIndex = 44;
+			this->button_selectForUpdatingCat->Text = L"Sel cat";
+			this->button_selectForUpdatingCat->UseVisualStyleBackColor = true;
+			this->button_selectForUpdatingCat->Click += gcnew System::EventHandler(this, &LogForm::button_selectForUpdatingCat_Click);
+			// 
+			// button_selectForUpdatingTran
+			// 
+			this->button_selectForUpdatingTran->Location = System::Drawing::Point(591, 72);
+			this->button_selectForUpdatingTran->Name = L"button_selectForUpdatingTran";
+			this->button_selectForUpdatingTran->Size = System::Drawing::Size(99, 23);
+			this->button_selectForUpdatingTran->TabIndex = 45;
+			this->button_selectForUpdatingTran->Text = L"Sel tran";
+			this->button_selectForUpdatingTran->UseVisualStyleBackColor = true;
+			this->button_selectForUpdatingTran->Click += gcnew System::EventHandler(this, &LogForm::button_selectForUpdatingTran_Click);
+			// 
+			// textBox_updatingName
+			// 
+			this->textBox_updatingName->Location = System::Drawing::Point(591, 101);
+			this->textBox_updatingName->Name = L"textBox_updatingName";
+			this->textBox_updatingName->Size = System::Drawing::Size(204, 22);
+			this->textBox_updatingName->TabIndex = 46;
+			this->textBox_updatingName->Text = L"Name";
+			// 
+			// textBox_updatingAmount
+			// 
+			this->textBox_updatingAmount->Location = System::Drawing::Point(592, 129);
+			this->textBox_updatingAmount->Name = L"textBox_updatingAmount";
+			this->textBox_updatingAmount->Size = System::Drawing::Size(204, 22);
+			this->textBox_updatingAmount->TabIndex = 47;
+			this->textBox_updatingAmount->Text = L"Amount";
+			// 
+			// textBox_updatingCategoryId
+			// 
+			this->textBox_updatingCategoryId->Location = System::Drawing::Point(591, 157);
+			this->textBox_updatingCategoryId->Name = L"textBox_updatingCategoryId";
+			this->textBox_updatingCategoryId->Size = System::Drawing::Size(204, 22);
+			this->textBox_updatingCategoryId->TabIndex = 48;
+			this->textBox_updatingCategoryId->Text = L"Cat id";
+			// 
+			// button_updateTransaction
+			// 
+			this->button_updateTransaction->Location = System::Drawing::Point(591, 186);
+			this->button_updateTransaction->Name = L"button_updateTransaction";
+			this->button_updateTransaction->Size = System::Drawing::Size(99, 23);
+			this->button_updateTransaction->TabIndex = 50;
+			this->button_updateTransaction->Text = L"Upd tran";
+			this->button_updateTransaction->UseVisualStyleBackColor = true;
+			this->button_updateTransaction->Click += gcnew System::EventHandler(this, &LogForm::button_updateTransaction_Click);
+			// 
+			// button_updateCategoty
+			// 
+			this->button_updateCategoty->Location = System::Drawing::Point(696, 186);
+			this->button_updateCategoty->Name = L"button_updateCategoty";
+			this->button_updateCategoty->Size = System::Drawing::Size(99, 23);
+			this->button_updateCategoty->TabIndex = 49;
+			this->button_updateCategoty->Text = L"Upd cat";
+			this->button_updateCategoty->UseVisualStyleBackColor = true;
+			this->button_updateCategoty->Click += gcnew System::EventHandler(this, &LogForm::button_updateCategoty_Click);
+			// 
 			// LogForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(844, 332);
+			this->ClientSize = System::Drawing::Size(1029, 441);
+			this->Controls->Add(this->button_updateTransaction);
+			this->Controls->Add(this->button_updateCategoty);
+			this->Controls->Add(this->textBox_updatingCategoryId);
+			this->Controls->Add(this->textBox_updatingAmount);
+			this->Controls->Add(this->textBox_updatingName);
+			this->Controls->Add(this->button_selectForUpdatingTran);
+			this->Controls->Add(this->button_selectForUpdatingCat);
+			this->Controls->Add(this->textBox_idToDel);
+			this->Controls->Add(this->button_DeleteCategory);
+			this->Controls->Add(this->button_DeleteTransaction);
+			this->Controls->Add(this->button_maxByTime);
+			this->Controls->Add(this->dateTimePickerEnd);
+			this->Controls->Add(this->dateTimePickerStart);
+			this->Controls->Add(this->button_groupByCategory);
+			this->Controls->Add(this->button_orderByAmount);
+			this->Controls->Add(this->button_orderByCategory);
+			this->Controls->Add(this->button_orderByDate);
 			this->Controls->Add(this->button_addTransaction);
 			this->Controls->Add(this->textBox_TransactionCatId);
 			this->Controls->Add(this->textBox_transactionAmount);
@@ -306,6 +543,7 @@ namespace ProjectCSmartbudgetmanager {
 			this->Controls->Add(this->textBox_password);
 			this->Controls->Add(this->singout_button);
 			this->Controls->Add(this->login_button);
+			this->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->Name = L"LogForm";
 			this->Text = L"LogForm";
 			this->Load += gcnew System::EventHandler(this, &LogForm::LogForm_Load);
@@ -387,6 +625,132 @@ private: System::Void button_addTransaction_Click(System::Object^ sender, System
 	catch (...) {
 	}
 
+}
+private: System::Void button_orderByDate_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!isLoggedIn) return;
+	DISPLAY->Items->Clear();
+	String^ result = showTransactions(login, "DATE_OF_TRANSACTION");
+	String^ row = "";
+	for (int i = 0; i < result->Length; i++) {
+		row += result[i];
+		if (result[i] == '|') {
+			DISPLAY->Items->Add(row);
+			row = "";
+		}
+	}
+}
+private: System::Void button_orderByCategory_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!isLoggedIn) return;
+	DISPLAY->Items->Clear();
+	String^ result = showTransactions(login, "CAREGORY_ID");
+	String^ row = "";
+	for (int i = 0; i < result->Length; i++) {
+		row += result[i];
+		if (result[i] == '|') {
+			DISPLAY->Items->Add(row);
+			row = "";
+		}
+	}
+}
+private: System::Void button_orderByAmount_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!isLoggedIn) return;
+	DISPLAY->Items->Clear();
+	String^ result = showTransactions(login, "AMOUNT");
+	String^ row = "";
+	for (int i = 0; i < result->Length; i++) {
+		row += result[i];
+		if (result[i] == '|') {
+			DISPLAY->Items->Add(row);
+			row = "";
+		}
+	}
+}
+private: System::Void button_groupByCategory_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!isLoggedIn) return;
+	DISPLAY->Items->Clear();
+	String^ result = showTransactionsGroupedBy(login, "CAREGORY_ID");
+	String^ row = "";
+	for (int i = 0; i < result->Length; i++) {
+		row += result[i];
+		if (result[i] == '|') {
+			DISPLAY->Items->Add(row);
+			row = "";
+		}
+	}
+}
+private: System::Void button_maxByTime_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!isLoggedIn) return;
+	String^ sDate = dateTimePickerStart->Value.ToString("yyyy-MM-dd");
+	String^ eDate = dateTimePickerEnd->Value.ToString("yyyy-MM-dd");
+	DISPLAY->Items->Clear();
+	String^ result = showTransactionsMaxByDate(login, sDate, eDate);
+	String^ row = "";
+	for (int i = 0; i < result->Length; i++) {
+		row += result[i];
+		if (result[i] == '|') {
+			DISPLAY->Items->Add(row);
+			row = "";
+		}
+	}
+}
+private: System::Void button_DeleteTransaction_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!isLoggedIn) return;
+	try {
+		int Tranid = Int32::Parse(textBox_idToDel->Text);
+		deleteTransaction(login, Tranid);
+	}
+	catch (...) {
+	}
+}
+private: System::Void button_DeleteCategory_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!isLoggedIn) return;
+	try {
+		int catId = Int32::Parse(textBox_idToDel->Text);
+		deleteCategory(login, catId);
+	}
+	catch (...) {
+	}
+}
+private: System::Void button_selectForUpdatingTran_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!isLoggedIn) return;
+	try {
+		int tranId = Int32::Parse(textBox_idToDel->Text);
+		textBox_updatingName->Text = getTransactionName(tranId, login);
+		textBox_updatingAmount->Text = marshal_as<String^>(std::to_string(getTransactionAmount(tranId, login)));
+		textBox_updatingCategoryId->Text = marshal_as<String^>(std::to_string(getTransactionCategoryId(tranId, login)));
+	}
+	catch (...) {
+	}
+}
+private: System::Void button_updateTransaction_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!isLoggedIn) return;
+	try {
+		int tranId = Int32::Parse(textBox_idToDel->Text);
+		String^ name = textBox_updatingName->Text;
+		double amount = Double::Parse(textBox_updatingAmount->Text, CultureInfo::InvariantCulture);
+		int catId = Int32::Parse(textBox_updatingCategoryId->Text);
+		updateTransaction(login, tranId, name, amount, catId);
+	}
+	catch (...) {
+	}
+}
+private: System::Void button_selectForUpdatingCat_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!isLoggedIn) return;
+	try {
+		int tranId = Int32::Parse(textBox_idToDel->Text);
+		textBox_updatingName->Text = getCategoryName(tranId, login);
+	}
+	catch (...) {
+	}
+}
+private: System::Void button_updateCategoty_Click(System::Object^ sender, System::EventArgs^ e) {
+	if (!isLoggedIn) return;
+	try {
+		int catId = Int32::Parse(textBox_idToDel->Text);
+		String^ name = textBox_updatingName->Text;
+		updateCategory(login, catId, name);
+	}
+	catch (...) {}
 }
 };
 }
