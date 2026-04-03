@@ -4,6 +4,9 @@
 #include "Wrapper.h"
 #include <iostream>
 #include <msclr/marshal_cppstd.h>
+#include "exeptionClasses.h"
+
+
 
 
 namespace ProjectCSmartbudgetmanager {
@@ -564,8 +567,22 @@ namespace ProjectCSmartbudgetmanager {
 		login = textBox_password->Text;
 		password = textBox_login->Text;
 		double b = balannce;
-		isLoggedIn = log(login, password, &b);
-		balannce = b;
+		try {
+			isLoggedIn = log(login, password, &b);
+			balannce = b;
+		}
+		catch (const UserNotFoundException& e) {
+			
+			isLoggedIn = false;
+			MessageBox::Show(marshal_as<String^>(e.what()));
+		}
+		catch (...){
+			
+			isLoggedIn = false;
+			MessageBox::Show("An error occurred while trying to log in.");
+		}
+		
+		
 	}
 	private: System::Void singout_button_Click(System::Object^ sender, System::EventArgs^ e) {
 		login = textBox_password->Text;

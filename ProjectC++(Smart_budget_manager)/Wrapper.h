@@ -5,6 +5,8 @@
 #include <msclr/marshal_cppstd.h>
 #include "UserClass.h"
 #include <chrono>
+#include "exeptionClasses.h"
+#include "logger.h"
 
 using namespace System;
 using namespace msclr::interop;
@@ -13,13 +15,15 @@ void startAll() {
 	DbMethods::createUsersTable();
 	DbMethods::createCategoriesTable();
 	DbMethods::createTransactionsTable();
+	logInf("Start application");
 }
 bool log(String^ login, String^ password, double* balance) {
 	std::string password1 = marshal_as<std::string>(password);
 	std::string login1 = marshal_as<std::string>(login);
-	if (!DbMethods::isUserExist(login1, password1)) return 0;
+	if (!DbMethods::isUserExist(login1, password1)) throw UserNotFoundException("User not found");
 	*balance = DbMethods::getBalance(login1);
 	std::cout << "YEAH\n";
+	logInf("User " + login1 + " logged in");
 	return 1;
 }
 bool signup(String^ login, String^ password, String^ name, String^ adress, double balance) {
@@ -31,17 +35,21 @@ bool signup(String^ login, String^ password, String^ name, String^ adress, doubl
 		std::cout << "YEAH\n";
 		User* user = new User(marshal_as<std::string>(name), password1, login1, adress1, balance);
 		DbMethods::addUser(user);
+		logInf("User " + login1 + " signed up");
 		return 1;
 	}
 	return 0;
 }
 String^ showTransactions(String^ login, std::string orderBy = "ID") {
+	logInf("User " + marshal_as<std::string>(login) + " showed transactions");
 	return marshal_as<String^>(DbMethods::getTransactions(marshal_as<std::string>(login), orderBy));
 }
 String^ showTransactionsGroupedBy(String^ login, std::string orderBygroupBy) {
+	logInf("User " + marshal_as<std::string>(login) + " showed transactions grouped by " + orderBygroupBy);
 	return marshal_as<String^>(DbMethods::getTransactionsGroupBy(marshal_as<std::string>(login), orderBygroupBy));
 }
 String^ showTransactionsMaxByDate(String^ login, String^ sDate, String^ eDate) {
+	logInf("User " + marshal_as<std::string>(login) + " showed transactions by date from " + marshal_as<std::string>(sDate) + " to " + marshal_as<std::string>(eDate));
 	return marshal_as<String^>(DbMethods::getTransactionsByDate(marshal_as<std::string>(login), marshal_as<std::string>(sDate), marshal_as<std::string>(eDate)));
 }
 void addCategory(String^ login, String^ categoryName) {
@@ -50,8 +58,10 @@ void addCategory(String^ login, String^ categoryName) {
 	int id = DbMethods::getUserId(login1);
 	Category* category = new Category(categoryName1, id);
 	DbMethods::addCategory(category);
+	logInf("User " + login1 + " added category " + categoryName1);
 }
 String^ showCategories(String^ login) {
+	logInf("User " + marshal_as<std::string>(login) + " showed categories");
 	return marshal_as<String^>(DbMethods::getCategories(marshal_as<std::string>(login)));
 }
 void addTransaction(String^ login, String^ transName, double transAmount, int catId) {
@@ -66,11 +76,13 @@ void addTransaction(String^ login, String^ transName, double transAmount, int ca
 	Transactoin* transaction = new Transactoin(transName1, transAmount, catId, id, year, month, day);
 	DbMethods::addTransaction(transaction);
 	DbMethods::updateBalance(login1, transAmount);
+	logInf("User " + login1 + " added transaction " + transName1 + " with amount " + std::to_string(transAmount) + " to category with id " + std::to_string(catId));
 }
 void deleteTransaction(String^ login, int Tranid) {
 	std::string login1 = marshal_as<std::string>(login);
 	DbMethods::updateBalance(login1, -DbMethods::getTransactionAmount(login1, Tranid));
 	DbMethods::deleteTransaction(login1, Tranid);
+	logInf("User " + login1 + " deleted transaction with id " + std::to_string(Tranid));
 
 }
 void deleteCategory(String^ login, int catId) {
@@ -78,6 +90,7 @@ void deleteCategory(String^ login, int catId) {
 	DbMethods::updateBalance(login1, -DbMethods::getSumAmountByCategoryId(catId));
 	DbMethods::deleteTransactionByCategoryId(catId);
 	DbMethods::deleteCategory(login1, catId);
+	logInf("User " + login1 + " deleted category with id " + std::to_string(catId));
 }
 double getBalance(String^ login) {
 	return DbMethods::getBalance(marshal_as<std::string>(login));
@@ -103,9 +116,11 @@ void updateTransaction(String^ login, int id, String^ name, double amount, int c
 	std::string name1 = marshal_as<std::string>(name);
 	DbMethods::updateBalance(login1, amount - DbMethods::getTransactionAmount(login1, id));
 	DbMethods::updateTransaction(login1, id, name1, amount, categoryId);
+	logInf("User " + login1 + " updated transaction with id " + std::to_string(id) + " to name " + name1 + ", amount " + std::to_string(amount) + " and category id " + std::to_string(categoryId));
 }
 void updateCategory(String^ login, int id, String^ name) {
 	std::string login1 = marshal_as<std::string>(login);
 	std::string name1 = marshal_as<std::string>(name);
 	DbMethods::updateCategory(login1, id, name1);
+	logInf("User " + login1 + " updated category with id " + std::to_string(id) + " to name " + name1);
 }
