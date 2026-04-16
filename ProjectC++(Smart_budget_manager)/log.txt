@@ -1,0 +1,46 @@
+Start application
+Start application
+Start application
+Start application
+Start application
+Start application
+User qwe12qwe signed up
+User qwe12qwe showed transactions
+User qwe12qwe showed categories
+User qwe12qwe added category sallery
+User qwe12qwe showed categories
+User qwe12qwe showed transactions
+User qwe12qwe added transaction My bos gave me some money yeaaaa with amount 0.300000 to category with id 6
+User qwe12qwe showed transactions
+User qwe12qwe showed transactions
+User qwe12qwe added transaction My bos stoll my money with amount -5.700000 to category with id 6
+User qwe12qwe showed transactions
+User qwe12qwe showed transactions
+User qwe12qwe showed transactions
+User qwe12qwe showed transactions grouped by CAREGORY_ID
+User qwe12qwe showed transactions grouped by CAREGORY_ID
+User qwe12qwe showed transactions
+User qwe12qwe showed transactions grouped by CAREGORY_ID
+User qwe12qwe showed transactions
+User qwe12qwe showed transactions by date from 2026-04-02 to 2026-04-16
+User qwe12qwe showed transactions
+User qwe12qwe deleted transaction with id 20
+User qwe12qwe showed transactions
+User qwe12qwe deleted category with id 6
+User qwe12qwe showed categories
+User qwe12qwe showed transactions
+User qwe12qwe added category sallery
+User qwe12qwe showed categories
+User qwe12qwe showed transactions
+User qwe12qwe added transaction My bos stoll my money with amount -5.700000 to category with id 7
+User qwe12qwe showed transactions
+User qwe12qwe updated transaction with id 22 to name My bos returned money, amount 32.000000 and category id 7
+User qwe12qwe showed transactions
+User qwe12qwe logged in
+User qwe12qwe added transaction My bos stoll my money with amount -5.700000 to category with id 7
+User qwe12qwe showed transactions
+User qwe12qwe showed transactions
+User qwe12qwe showed transactions
+User qwe12qwe updated transaction with id 23 to name My bos stoll my money, amount -5.800000 and category id 7
+User qwe12qwe showed transactions
+User qwe12qwe logged in

@@ -610,6 +610,7 @@ private: System::Void timer1_Tick(System::Object^ sender, System::EventArgs^ e) 
 	if (!isLoggedIn) return;
 	BalanceL->Text = "Balance" + marshal_as<String^>(std::to_string(balannce));
 }
+
 private: System::Void button2_Click(System::Object^ sender, System::EventArgs^ e) {
 	if (!isLoggedIn) return;
 	categories->Items->Clear();
